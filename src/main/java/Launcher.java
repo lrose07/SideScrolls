@@ -17,4 +17,6 @@ public class Launcher {
  * magic - you're a witch/wizard getting through side-scrolling levels
  * You collect magical items and use them to do cool things and
  * defeat enemies (weapons, potions, power-up things)
+ *
+ * Game spec
  */

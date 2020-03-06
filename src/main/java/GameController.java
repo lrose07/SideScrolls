@@ -1,4 +1,10 @@
+import javax.swing.*;
+
 public class GameController {
+
+    JFrame currentView;
+
+    // should have a list of views
 
     GameController() {
 
@@ -6,7 +12,13 @@ public class GameController {
 
 
     void run() {
-        // create models
-        // create views
+
+    }
+
+    // will this work?
+    void setCurrentView(JFrame f) {
+        currentView.setVisible(false);
+        currentView = f;
+        currentView.setVisible(true);
     }
 }
