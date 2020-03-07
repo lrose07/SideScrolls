@@ -1,27 +1,45 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class PlayerElementTest {
-    private PlayerElement playerElement = new PlayerElement(50, 50);
+    private final int playerStartXPosition = 50;
+    private final int playerStartYPosition = 50;
+    private final int enemyStartXPosition = 60;
+    private final int enemyStartYPosition = 60;
+
+
+    private PlayerElement playerElement = new PlayerElement(playerStartXPosition, playerStartYPosition);
+    private EnemyElement enemyElement = new EnemyElement(enemyStartXPosition, enemyStartYPosition);
 
     @Test
     void testMoveLeft() {
-        playerElement.moveLeft(10);
-        assert playerElement.getXPosition() == 40;
+        int movementDistance = 10;
+        playerElement.moveLeft(movementDistance);
+        assert playerElement.getXPosition() == playerStartXPosition - movementDistance;
     }
 
     @Test
     void testMoveRight() {
-        playerElement.moveRight(10);
-        assert playerElement.getXPosition() == 60;
+        int movementDistance = 10;
+        playerElement.moveRight(movementDistance);
+        assert playerElement.getXPosition() == playerStartXPosition + movementDistance;
     }
 
     @Test
-    void jump() {
-        assert false;
+    void testJump() {
+        playerElement.jump();
+        assert playerElement.getYPosition() == 70;
+    }
+
+    @Disabled("Test not yet implemented")
+    @Test
+    void testFall() {
+        throw new AssertionError("Test not yet implemented");
     }
 
     @Test
-    void attackEnemy(EnemyElement enemy) {
-        assert false;
+    void testAttackEnemyUnarmed() {
+        playerElement.attackEnemy(enemyElement);
+        assert enemyElement.getCurrentHealth() == 90;
     }
 }
