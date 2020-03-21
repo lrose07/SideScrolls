@@ -1,10 +1,11 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class EnemyElementTest {
 
-    private final int playerStartXPosition = 50;
-    private final int playerStartYPosition = 50;
+//    private final int playerStartXPosition = 50;
+//    private final int playerStartYPosition = 50;
 
     private final int enemyStartXPosition = 60;
     private final int enemyStartYPosition = 60;
@@ -12,32 +13,44 @@ public class EnemyElementTest {
 
     private final int moveDistance = 10;
 
-    private PlayerElement playerElement = new PlayerElement(playerStartXPosition, playerStartYPosition);
+//    private PlayerElement playerElement = new PlayerElement(playerStartXPosition, playerStartYPosition);
     private EnemyElement enemyElement = new EnemyElement(enemyStartXPosition, enemyStartYPosition, enemyDamagePerHit);
-    private Weapon weapon = new Weapon(30);
+    private Weapon weapon = new Weapon(30, 10);
 
     @Test
-    void moveLeft() {
+    void testMoveLeft() {
         enemyElement.moveLeft(moveDistance);
         assert enemyElement.getXPosition() == enemyStartXPosition - moveDistance;
     }
 
     @Test
-    void moveRight() {
+    void testMoveRight() {
         enemyElement.moveRight(moveDistance);
         assert enemyElement.getXPosition() == enemyStartXPosition + moveDistance;
     }
 
     @Test
-    void testGetAttacked() {
-        enemyElement.getAttacked(weapon.getDamagePerHit());
+    void testTakeDamage() {
+        enemyElement.takeDamage(weapon.getDamagePerHit());
         assert enemyElement.getCurrentHealth() == enemyElement.getStartingHealth() - weapon.getDamagePerHit();
     }
 
-    @Disabled("Enemies cannot yet attack the player")
     @Test
-    void testAttackPlayer() {
-        enemyElement.attackPlayer();
-        assert playerElement.getCurrentHealth() == playerElement.getStartingHealth() - enemyElement.getDamagePerHit();
+    void testTakeDamageStartingWithMoreHealth() {
+        int alteredStartingHealth = 200;
+        EnemyElement ee = new EnemyElement(enemyStartXPosition, enemyStartYPosition, alteredStartingHealth, enemyDamagePerHit);
+        ee.takeDamage(weapon.getDamagePerHit());
+        assert ee.getCurrentHealth() == ee.getStartingHealth() - weapon.getDamagePerHit();
+    }
+
+    @Disabled("currently determined to be not needed - will reevaluate later")
+    @Test
+    void testAttemptAttack() {
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> enemyElement.attemptAttack());
+    }
+
+    @Test
+    void testDie() {
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> enemyElement.die());
     }
 }

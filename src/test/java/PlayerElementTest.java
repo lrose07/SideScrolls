@@ -11,7 +11,7 @@ class PlayerElementTest {
 
     private PlayerElement playerElement = new PlayerElement(playerStartXPosition, playerStartYPosition);
     private EnemyElement enemyElement = new EnemyElement(enemyStartXPosition, enemyStartYPosition, enemyDamagePerHit);
-    private Weapon weapon = new Weapon(30);
+    private Weapon weapon = new Weapon(30, 20);
 
     @Test
     void testMoveLeft() {
