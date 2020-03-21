@@ -7,6 +7,7 @@ public class PlayerElement extends MovingElement {
 
     private Weapon currentWeapon;
     private int unarmedDamage = 10;
+    private int unarmedRange = 5;
 
     private final int startingHealth = 100;
     private int currentHealth;
@@ -36,9 +37,9 @@ public class PlayerElement extends MovingElement {
 
     void attackEnemy(EnemyElement enemy) {
         if (currentWeapon == null) {
-            enemy.getAttacked(unarmedDamage);
+            enemy.takeDamage(unarmedDamage);
         } else {
-            enemy.getAttacked(currentWeapon.getDamagePerHit());
+            enemy.takeDamage(currentWeapon.getDamagePerHit());
         }
     }
 
@@ -60,6 +61,14 @@ public class PlayerElement extends MovingElement {
 
     int getCurrentHealth() {
         return currentHealth;
+    }
+
+    int getCurrentRange() {
+        if (currentWeapon == null) {
+            return unarmedRange;
+        } else {
+            return currentWeapon.getRange();
+        }
     }
 
 //    void setCurrentHealth(int newHealth) {

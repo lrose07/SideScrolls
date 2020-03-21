@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class EnemyElement extends MovingElement {
 
     private int xPosition, yPosition, startingHealth;
@@ -29,20 +31,22 @@ public class EnemyElement extends MovingElement {
         xPosition += dX;
     }
 
-    void getAttacked(int attackDamage) {
-        currentHealth -= attackDamage;
+    void takeDamage(int damage) {
+        currentHealth -= damage;
 
         if (currentHealth <= 0) {
             die();
         }
     }
 
-    void attackPlayer() {
-        throw new UnsupportedOperationException("Enemies cannot yet attack the player");
+    int attemptAttack() {
+        Random random = new Random();
+        return random.nextInt(getDamagePerHit() + 1);
     }
 
     void die() {
         System.out.println("enemy dead");
+        throw new UnsupportedOperationException("Enemies cannot yet die");
     }
 
     int getCurrentHealth() {
